@@ -23,6 +23,23 @@ Also, if there is an error, the `error_listener` is called.
 
 *The plugin does not use any application-level protocols, for example, such as HTTP, so you will not be able to simply work with servers using HTTP. The plugin is designed to connect to custom servers written from scratch.*
 
+# A simple example
+```lua
+local server = require "plugin.SimpleClient"
+
+local function listener( event )
+	print( "Response from the server: " .. event.msg )
+end
+
+local function errList( event )
+	print( "Error: " .. event.msg )
+end
+
+server.init("192.168.0.120", 7777, listener, errList)
+
+print(server.send("Hello, World!"))
+```
+
 ## Русский
 Этот плагин позволяет приложению подключиться к не HTTP серверу.  
 Текущая версия плагина имеет всего две функции: `init`, `send`.  
